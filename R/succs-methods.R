@@ -1,3 +1,15 @@
+#' Create an anti-profile from a SuccsStats object
+#' 
+#' This function creates anti-profiles using statistics stored in a SuccsStats object
+#' 
+#' @param stats an object of class SuccsStats as produced by the succStats function
+#' @param tissueSpec use tissue-specific regions of normal expression 
+#' @param tissueFilter use only tissue-specific genes in the anti-profile
+#' @param sigsize desired size of signature, if NULL, computed from statCutoff
+#' @param cutoff median absolute deviation multiplier used to define normal regions of expression
+#' @param statCutoff cutoff used to include probesets in anti-profile
+#' @return an object of class SuccsSig or SuccsTissueSig depending on the tissueSpec argument
+#' @export
 setMethod("succs", signature(stats="SuccsStats"),
           function(stats, tissueSpec=TRUE, tissueFilter=FALSE, sigsize=NULL, cutoff=5, statCutoff=1, ...)
           {

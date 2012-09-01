@@ -4,7 +4,19 @@ Author: Hector Corrada Bravo, Rafael A. Irizarry and Jeffrey T. Leek
 Version: 0.99.0
 License: Artistic-2.0
 Title: Implementation of gene expression anti-profiles
-Description:Implements gene expression anti-profiles as described in Corrada Bravo et al., Under revision.
-Depends: R (>= 2.14), matrixStats (>= 0.5)
+Description: Implements gene expression anti-profiles as described in Corrada
+    Bravo et al., Under revision.
+Depends:
+    R (>= 2.14),
+    matrixStats (>= 0.5)
+Suggests:
+    frma
 Collate:
     'succs-package.r'
+    'AllClasses.R'
+    'AllGenerics.R'
+    'show-methods.R'
+    'succStats.R'
+    'succs-methods.R'
+    'succsCounts-methods.R'
+    'succsReorder-methods.R'

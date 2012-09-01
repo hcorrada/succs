@@ -1,3 +1,36 @@
+#' Statistics used to build anti-profiles
+#' 
+#' This class stores statistics required to build anti-profiles. Objects of this class should be created
+#' using the succStats function.
+#' 
+#' @section Slots: \describe{
+#'    \item{\code{probes}:}{A data.frame with probe statistics: Columns are the following
+#'      \describe{
+#'        \item{\code{affyid}:}{Affymetrix probeset id}
+#'        \item{\code{SD0}:}{Normal expression standard deviation (aggregated over tissue types)}
+#'        \item{\code{SD1}:}{Cancer expression standard deviation (aggregated over tumor types)}
+#'        \item{\code{stat}:}{The log2-variance ratio statistic}
+#'        \item{\code{meds0}:}{Median normal expression (aggregated over tissue types)}
+#'        \item{\code{mads0}:}{Median absolute deviation of normal expression (aggregate over tissue types)}        
+#'      }
+#'    }
+#'    \item{\code{normalTissues}:}{Names of normal tissue types included in the dataset}
+#'    \item{\code{cancerTissues}:}{Names of cancer tumor types included in the dataset}
+#'    \item{\code{call}:}{The call to the succStats function}
+#'    \item{\code{sd0}:}{Normal standard deviations for each tissue type}
+#'    \item{\code{sd1}:}{Cancer standard deviations for each tumor type}
+#'    \item{\code{p0}:}{Proportion of samples expressed for each normal tissue type}
+#'    \item{\code{p1}:}{Proportion of samples expressed for each tumor type}
+#'    \item{\code{tMeds}:}{Median normal expression for each tissue type}
+#'    \item{\code{tMads}:}{Median absolute deviation of normal expression for each tissue type}
+#'    \item{\code{tProps0}:}{Proportion of normal samples outside normal region of expression for each tissue type}
+#'    \item{\code{tProps1}:}{Proportion of cancer samples outside normal region of expression for each tumor type}
+#'  }
+#'
+#'  @name SuccsStats-class
+#'  @rdname succsstats-class
+#'    
+#' @export
 setClass("SuccsStats",
          representation=representation(probes="data.frame",
            normalTissues="character",
@@ -12,7 +45,21 @@ setClass("SuccsStats",
            tProps0="matrix",
            tProps1="matrix"))
 
-
+#' A gene expression anti-profile
+#' 
+#' Objects of this class are used to calculate anti-profile scores for samples.
+#' 
+#' @section Slots: \describe{
+#'     \item{\code{probes}:}{Affymetrix ids of probesets used in anti-profile}
+#'     \item{\code{meds0}:}{Median normal expression}
+#'     \item{\code{mads0}:}{Median absolute deviation of normal expression}
+#'     \item{\code{cutoff}:}{Multiplier in mad used to determine region of normal expression}
+#'   }
+#'
+#' @name SuccsSig-class
+#' @rdname succssig-class
+#' 
+#' @export
 setClass("SuccsSig",
          representation=representation(probes="character",
            meds0="numeric",
@@ -20,11 +67,21 @@ setClass("SuccsSig",
            cutoff="numeric",
            filterFunc="character"))
 
+#' A gene expression anti-profile using tissue-specific regions
+#' 
+#' Objects of this class are used to calculate anti-profile scores for samples.
+#' 
+#' @section Slots: \describe{
+#'    \item{\code{tMeds}:}{Median expression for each tissue type}
+#'    \item{\code{tMads}:}{Median absolute deviation for each tissue type}
+#'    \item{\code{theTiss}:}{List of tissue type names}
+#'   }
+#'   
+#' @name SuccsTissueSig-class
+#' @rdname succstissuesig-class
+#' @export
 setClass("SuccsTissueSig",
          contains="SuccsSig",
          representation=representation(tMeds="matrix",
            tMads="matrix",
            theTiss="list"))
-
-
-

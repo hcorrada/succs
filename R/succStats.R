@@ -1,3 +1,16 @@
+#' Compute statistics used to construct antiProfile
+#' 
+#' This function calculates normal ranges of expressions and variance ratios for all probesets. To create an anti-profile,
+#' call succs on the output of this function 
+#' 
+#' @param e matrix of gene expression, with one column per sample 
+#' @param cl vector of normal/cancer indicators as 0/1 
+#' @param tiss vector of tissue types for each sample
+#' @param minL minimum number of samples of a given tissue/class to compute stats
+#' @param cutoff median absolute deviation multiplier used to determine proportion of samples within normal range of expression
+#' @param OnCutoff gene expression barcode z-score to determine if a gene is expressed
+#' @return An object of class SuccsStats
+#' @export
 succStats <- function(e, cl, tiss=NULL, minL=10, cutoff=5, OnCutoff=2.54)
   {
     message("Getting sample indices")
