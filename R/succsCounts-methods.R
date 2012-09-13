@@ -6,7 +6,22 @@
 #' @param fit an object of class SuccsSig as produced by the succs method
 #' @param expr a matrix of gene expression, rownames are used as identifiers
 #' @return a vector of anti-profile scores
-#' @export
+#' 
+#' @examples 
+#'   \dontrun {
+#'   library(succsData)
+#'   data(succsColonData)
+#'   
+#'   # compute statistics
+#'   colonStats = succsStats(succsColonData$expr, succsColonData$cl)
+#'   
+#'   # create an anti-profile, ignoring tissue-specificity of probesets, with 10 probesets
+#'   ap = succs(colonStats, tissueSpec=FALSE, sigsize=10)
+#'   
+#'   # get counts for the original dataset
+#'   counts =succsCount(ap, succsColonData$expr)
+#'  }
+#' @export  
 setMethod("succsCount",
           signature(fit="SuccsSig",
                     expr="matrix"),

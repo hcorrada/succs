@@ -9,6 +9,12 @@
 #' @param cutoff median absolute deviation multiplier used to define normal regions of expression
 #' @param statCutoff cutoff used to include probesets in anti-profile
 #' @return an object of class SuccsSig or SuccsTissueSig depending on the tissueSpec argument
+#' 
+#' @examples 
+#' show(colonStats)
+#' # create an anti-profile, ignoring tissue-specificity of probesets, with 10 probesets
+#' ap = succs(colonStats, tissueSpec=FALSE, sigsize=10)
+#'   
 #' @export
 setMethod("succs", signature(stats="SuccsStats"),
           function(stats, tissueSpec=TRUE, tissueFilter=FALSE, sigsize=NULL, cutoff=5, statCutoff=1, ...)

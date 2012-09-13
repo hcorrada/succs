@@ -8,9 +8,11 @@ Description: Implements gene expression anti-profiles as described in Corrada
     Bravo et al., Under revision.
 Depends:
     R (>= 2.14),
-    matrixStats (>= 0.5)
+    matrixStats (>= 0.5),
+    methods (>= 2.14),
+biocViews: Classification
 Suggests:
-    frma
+    succsData
 Collate:
     'succs-package.r'
     'AllClasses.R'
@@ -20,3 +22,4 @@ Collate:
     'succs-methods.R'
     'succsCounts-methods.R'
     'succsReorder-methods.R'
+    'colonstats.r'

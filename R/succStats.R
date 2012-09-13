@@ -10,6 +10,14 @@
 #' @param cutoff median absolute deviation multiplier used to determine proportion of samples within normal range of expression
 #' @param OnCutoff gene expression barcode z-score to determine if a gene is expressed
 #' @return An object of class SuccsStats
+#' 
+#' 
+#' @examples \dontrun{
+#'  library(succsData)
+#'  data(succsColonData)
+#'  colonStats = succStats(succsColonData$expr, succsColonData$cl)
+#' }
+#' 
 #' @export
 succStats <- function(e, cl, tiss=NULL, minL=10, cutoff=5, OnCutoff=2.54)
   {
