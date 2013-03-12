@@ -1,7 +1,7 @@
 #' Compute statistics used to construct antiProfile
 #' 
 #' This function calculates normal ranges of expressions and variance ratios for all probesets. To create an anti-profile,
-#' call succs on the output of this function 
+#' call buildAntiProfile on the output of this function 
 #' 
 #' @param e matrix of gene expression, with one column per sample 
 #' @param cl vector of normal/cancer indicators as 0/1 
@@ -13,13 +13,13 @@
 #' 
 #' 
 #' @examples \dontrun{
-#'  library(succsData)
-#'  data(succsColonData)
-#'  colonStats = succStats(succsColonData$expr, succsColonData$cl)
+#'  library(antiProfilesData)
+#'  data(apColonData)
+#'  colonStats = apStats(apColonData$expr, apColonData$cl)
 #' }
 #' 
 #' @export
-succStats <- function(e, cl, tiss=NULL, minL=10, cutoff=5, OnCutoff=2.54)
+apStats <- function(e, cl, tiss=NULL, minL=10, cutoff=5, OnCutoff=2.54)
   {
     message("Getting sample indices")
     cIndex0=which(cl==0)
@@ -71,7 +71,7 @@ succStats <- function(e, cl, tiss=NULL, minL=10, cutoff=5, OnCutoff=2.54)
       stringsAsFactors=FALSE)
 
     o=order(-probes$stat)
-    new("SuccsStats",
+    new("AntiProfileStats",
         probes=probes[o,],
         normalTissues=names(tIndexes0),
         cancerTissues=names(tIndexes1),

@@ -1,29 +1,29 @@
 #' Obtain the anti-profile score for a set of samples
 #' 
 #' This function applies the given anti-profile to a new set of samples. Rownames in the expression matrix
-#' are used to match probenames in the SuccsSig object.
+#' are used to match probenames in the AntiProfile object.
 #' 
-#' @param fit an object of class SuccsSig as produced by the succs method
+#' @param fit an object of class AntiProfile as produced by the buildAntiProfile method
 #' @param expr a matrix of gene expression, rownames are used as identifiers
 #' @return a vector of anti-profile scores
 #' 
 #' @examples 
 #'   \dontrun {
-#'   library(succsData)
-#'   data(succsColonData)
+#'   library(antiProfilesData)
+#'   data(apColonData)
 #'   
 #'   # compute statistics
-#'   colonStats = succsStats(succsColonData$expr, succsColonData$cl)
+#'   colonStats = apStats(apColonData$expr, apColonData$cl)
 #'   
 #'   # create an anti-profile, ignoring tissue-specificity of probesets, with 10 probesets
-#'   ap = succs(colonStats, tissueSpec=FALSE, sigsize=10)
+#'   ap = buildAntiProfile(colonStats, tissueSpec=FALSE, sigsize=10)
 #'   
 #'   # get counts for the original dataset
-#'   counts =succsCount(ap, succsColonData$expr)
+#'   counts =apCount(ap, apColonData$expr)
 #'  }
 #' @export  
-setMethod("succsCount",
-          signature(fit="SuccsSig",
+setMethod("apCount",
+          signature(fit="AntiProfile",
                     expr="matrix"),
           function(fit, expr, ...)
           {
@@ -52,14 +52,14 @@ setMethod("succsCount",
 #' Obtain the anti-profile score for a set of samples
 #' 
 #' This function applies the given anti-profile to a new set of samples. Rownames in the expression matrix
-#' are used to match probenames in the SuccsTissueSig object.
+#' are used to match probenames in the TissueSpecAntiProfile object.
 #' 
-#' @param fit an object of class SuccsTissueSig as produced by the succs method
+#' @param fit an object of class TissueSpecAntiProfile as produced by the buildAntiProfile method
 #' @param expr a matrix of gene expression, rownames are used as identifiers
 #' @return a vector of anti-profile scores
 #' @export
-setMethod("succsCount",
-          signature(fit="SuccsTissueSig",
+setMethod("apCount",
+          signature(fit="TissueSpecAntiProfile",
                     expr="matrix"), .countTissSpec)
 
 

@@ -1,7 +1,7 @@
 #' Statistics used to build anti-profiles
 #' 
 #' This class stores statistics required to build anti-profiles. Objects of this class should be created
-#' using the succStats function.
+#' using the apStats function.
 #' 
 #' @section Slots: \describe{
 #'    \item{\code{probes}:}{A data.frame with probe statistics: Columns are the following
@@ -27,11 +27,11 @@
 #'    \item{\code{tProps1}:}{Proportion of cancer samples outside normal region of expression for each tumor type}
 #'  }
 #'
-#'  @name SuccsStats-class
-#'  @rdname succsstats-class
+#'  @name AntiProfileStats-class
+#'  @rdname aptats-class
 #'    
 #' @export
-setClass("SuccsStats",
+setClass("AntiProfileStats",
          representation=representation(probes="data.frame",
            normalTissues="character",
            cancerTissues="character",
@@ -56,11 +56,11 @@ setClass("SuccsStats",
 #'     \item{\code{cutoff}:}{Multiplier in mad used to determine region of normal expression}
 #'   }
 #'
-#' @name SuccsSig-class
-#' @rdname succssig-class
+#' @name AntiProfile-class
+#' @rdname antiprofile-class
 #' 
 #' @export
-setClass("SuccsSig",
+setClass("AntiProfile",
          representation=representation(probes="character",
            meds0="numeric",
            mads0="numeric",
@@ -77,11 +77,11 @@ setClass("SuccsSig",
 #'    \item{\code{theTiss}:}{List of tissue type names}
 #'   }
 #'   
-#' @name SuccsTissueSig-class
-#' @rdname succstissuesig-class
+#' @name TissueSpecAntiProfile-class
+#' @rdname tissueSpecAntiprofile-class
 #' @export
-setClass("SuccsTissueSig",
-         contains="SuccsSig",
+setClass("TissueSpecAntiProfile",
+         contains="AntiProfile",
          representation=representation(tMeds="matrix",
            tMads="matrix",
            theTiss="list"))

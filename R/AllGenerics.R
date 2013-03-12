@@ -1,15 +1,15 @@
-setGeneric("succs",
-           function(stats, tissueSpec=TRUE, ...) standardGeneric("succs"),
+setGeneric("buildAntiProfile",
+           function(stats, tissueSpec=TRUE, ...) standardGeneric("buildAntiProfile"),
            signature=c("stats"))
 
 setGeneric("tissueProps",
            function(stats, e, isNormal, tiss, cutoff, ...) standardGeneric("tissueProps"),
            signature=c("stats","e","isNormal","tiss","cutoff"))
 
-setGeneric("succsCount",
-           function(fit, expr, ...) standardGeneric("succsCount"),
+setGeneric("apCount",
+           function(fit, expr, ...) standardGeneric("apCount"),
            signature=c("fit", "expr"))
 
-setGeneric("succsReorder",
-           function(stats, o) standardGeneric("succsReorder"),
+setGeneric("apReorder",
+           function(stats, o) standardGeneric("apReorder"),
            signature=c("stats","o"))
