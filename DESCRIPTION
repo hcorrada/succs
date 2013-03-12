@@ -1,18 +1,18 @@
-Package: succs
+Package: antiProfiles
 Maintainer: Hector Corrada Bravo <hcorrada@gmail.com>
 Author: Hector Corrada Bravo, Rafael A. Irizarry and Jeffrey T. Leek
 Version: 0.99.0
 License: Artistic-2.0
 Title: Implementation of gene expression anti-profiles
 Description: Implements gene expression anti-profiles as described in Corrada
-    Bravo et al., Under revision.
+    Bravo et al., BMC Bioinformatics 2012, 13:272 doi:10.1186/1471-2105-13-272.
 Depends:
     R (>= 2.14),
     matrixStats (>= 0.5),
     methods (>= 2.14),
 biocViews: Classification
 Suggests:
-    succsData
+    antiProfilesData
 Collate:
     'succs-package.r'
     'AllClasses.R'
