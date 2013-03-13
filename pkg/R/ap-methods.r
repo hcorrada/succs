@@ -1,23 +1,5 @@
-#' Create an anti-profile from a AntiProfileStats object
-#' 
-#' This function creates anti-profile using statistics stored in a AntiProfileStats object
-#' 
-#' @param stats an object of class AntiProfileStats as produced by the apStats function
-#' @param tissueSpec use tissue-specific regions of normal expression 
-#' @param tissueFilter use only tissue-specific genes in the anti-profile
-#' @param sigsize desired size of signature, if NULL, computed from statCutoff
-#' @param cutoff median absolute deviation multiplier used to define normal regions of expression
-#' @param statCutoff cutoff used to include probesets in anti-profile
-#' @return an object of class AntiProfilesSig or AntiProfilesTissueSig depending on the tissueSpec argument
-#' 
-#' @examples 
-#' if (require(antiProfilesData)) {
-#'   # create an anti-profile, ignoring tissue-specificity of probesets, with 10 probesets
-#'   data(apColonData)
-#'   colonStats = apStats(exprs(apColonData), pData(apColonData)$status)
-#'   ap = buildAP(colonStats, tissueSpec=FALSE, sigsize=10)
-#' }   
-#' @export
+#' @rdname buildAntiProfile-methods
+#' @aliases buildAntiProfile,AntiProfileStats-method
 setMethod("buildAntiProfile", signature(stats="AntiProfileStats"),
           function(stats, tissueSpec=TRUE, tissueFilter=FALSE, sigsize=NULL, cutoff=5, statCutoff=1, ...)
           {

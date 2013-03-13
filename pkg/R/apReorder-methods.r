@@ -1,19 +1,5 @@
-#' Reorder an AntiProfileStats object
-#' 
-#' Reorders given AntiProfileStats object using provided ordering o
-#' 
-#' @param stats An object of class AntiProfileStats
-#' @param o A numeric vector giving new probe ordering
-#' @return A reordered AntiProfileStats object
-#' 
-#' @examples 
-#' if (require(antiProfilesData)) {
-#'   data(apColonData)
-#'   colonStats = apStats(exprs(apColonData), pData(apColonData)$type)
-#'   o = sample(seq(len=nrow(colonStats@probes)))
-#'   newStats = apReorder(colonStats, o)
-#' } 
-#' @export
+#' @rdname apReorder-methods
+#' @aliases apReorder,AntiProfileStats,numeric-method
 setMethod("apReorder", signature(stats="AntiProfileStats",o="numeric"),
           function(stats, o) {
             new("AntiProfileStats",

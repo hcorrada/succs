@@ -27,9 +27,8 @@
 #'    \item{\code{tProps1}:}{Proportion of cancer samples outside normal region of expression for each tumor type}
 #'  }
 #'
-#'  @name AntiProfileStats-class
-#'  @rdname aptats-class
-#'    
+#' @name AntiProfileStats-class
+#' @rdname antiprofilestats-class
 #' @export
 setClass("AntiProfileStats",
          representation=representation(probes="data.frame",

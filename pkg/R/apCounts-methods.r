@@ -1,26 +1,5 @@
-#' Obtain the anti-profile score for a set of samples
-#' 
-#' This function applies the given anti-profile to a new set of samples. Rownames in the expression matrix
-#' are used to match probenames in the AntiProfile object.
-#' 
-#' @param fit an object of class AntiProfile as produced by the buildAntiProfile method
-#' @param expr a matrix of gene expression, rownames are used as identifiers
-#' @return a vector of anti-profile scores
-#' 
-#' @examples 
-#'   if (require(antiProfilesData)) {
-#'     data(apColonData)
-#'   
-#'     # compute statistics
-#'     colonStats = apStats(exprs(apColonData), pData(apColonData)$Status)
-#'   
-#'     # create an anti-profile, ignoring tissue-specificity of probesets, with 10 probesets
-#'     ap = buildAntiProfile(colonStats, tissueSpec=FALSE, sigsize=10)
-#'   
-#'     # get counts for the original dataset
-#'     counts =apCount(ap, exprs(apColonData$expr))
-#'  }
-#' @export  
+#' @rdname apCount-methods
+#' @aliases apCount,AntiProfile,matrix-method
 setMethod("apCount",
           signature(fit="AntiProfile",
                     expr="matrix"),
@@ -48,15 +27,8 @@ setMethod("apCount",
     colSums(xx1)
   }
 
-#' Obtain the anti-profile score for a set of samples
-#' 
-#' This function applies the given anti-profile to a new set of samples. Rownames in the expression matrix
-#' are used to match probenames in the TissueSpecAntiProfile object.
-#' 
-#' @param fit an object of class TissueSpecAntiProfile as produced by the buildAntiProfile method
-#' @param expr a matrix of gene expression, rownames are used as identifiers
-#' @return a vector of anti-profile scores
-#' @export
+#' @rdname apCount-methods
+#' @aliases apCount,TissueSpecAntiProfile,matrix-method
 setMethod("apCount",
           signature(fit="TissueSpecAntiProfile",
                     expr="matrix"), .countTissSpec)

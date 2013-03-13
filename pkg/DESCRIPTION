@@ -17,7 +17,6 @@ Collate:
     'AllClasses.R'
     'AllGenerics.R'
     'show-methods.R'
-    'colonstats.r'
     'antiProfiles-package.r'
     'ap-methods.r'
     'apCounts-methods.r'
