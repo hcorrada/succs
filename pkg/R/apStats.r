@@ -12,11 +12,11 @@
 #' @return An object of class SuccsStats
 #' 
 #' 
-#' @examples \dontrun{
-#'  library(antiProfilesData)
-#'  data(apColonData)
-#'  colonStats = apStats(apColonData$expr, apColonData$cl)
-#' }
+#' @examples
+#'  if (require(antiProfilesData)) { 
+#'    data(apColonData)
+#'    colonStats = apStats(exprs(apColonData), pData(apColonData)$Status)
+#'  }
 #' 
 #' @export
 apStats <- function(e, cl, tiss=NULL, minL=10, cutoff=5, OnCutoff=2.54)

@@ -7,11 +7,12 @@
 #' @return A reordered AntiProfileStats object
 #' 
 #' @examples 
-#' show(colonStats)
-#' 
-#' o = sample(seq(len=nrow(colonStats@probes)))
-#' newStats = apReorder(colonStats, o)
-#'    
+#' if (require(antiProfilesData)) {
+#'   data(apColonData)
+#'   colonStats = apStats(exprs(apColonData), pData(apColonData)$type)
+#'   o = sample(seq(len=nrow(colonStats@probes)))
+#'   newStats = apReorder(colonStats, o)
+#' } 
 #' @export
 setMethod("apReorder", signature(stats="AntiProfileStats",o="numeric"),
           function(stats, o) {

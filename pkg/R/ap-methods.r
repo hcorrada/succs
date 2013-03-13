@@ -11,10 +11,12 @@
 #' @return an object of class AntiProfilesSig or AntiProfilesTissueSig depending on the tissueSpec argument
 #' 
 #' @examples 
-#' show(colonStats)
-#' # create an anti-profile, ignoring tissue-specificity of probesets, with 10 probesets
-#' ap = buildAP(colonStats, tissueSpec=FALSE, sigsize=10)
-#'   
+#' if (require(antiProfilesData)) {
+#'   # create an anti-profile, ignoring tissue-specificity of probesets, with 10 probesets
+#'   data(apColonData)
+#'   colonStats = apStats(exprs(apColonData), pData(apColonData)$status)
+#'   ap = buildAP(colonStats, tissueSpec=FALSE, sigsize=10)
+#' }   
 #' @export
 setMethod("buildAntiProfile", signature(stats="AntiProfileStats"),
           function(stats, tissueSpec=TRUE, tissueFilter=FALSE, sigsize=NULL, cutoff=5, statCutoff=1, ...)

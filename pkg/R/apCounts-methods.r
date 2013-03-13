@@ -8,18 +8,17 @@
 #' @return a vector of anti-profile scores
 #' 
 #' @examples 
-#'   \dontrun {
-#'   library(antiProfilesData)
-#'   data(apColonData)
+#'   if (require(antiProfilesData)) {
+#'     data(apColonData)
 #'   
-#'   # compute statistics
-#'   colonStats = apStats(apColonData$expr, apColonData$cl)
+#'     # compute statistics
+#'     colonStats = apStats(exprs(apColonData), pData(apColonData)$Status)
 #'   
-#'   # create an anti-profile, ignoring tissue-specificity of probesets, with 10 probesets
-#'   ap = buildAntiProfile(colonStats, tissueSpec=FALSE, sigsize=10)
+#'     # create an anti-profile, ignoring tissue-specificity of probesets, with 10 probesets
+#'     ap = buildAntiProfile(colonStats, tissueSpec=FALSE, sigsize=10)
 #'   
-#'   # get counts for the original dataset
-#'   counts =apCount(ap, apColonData$expr)
+#'     # get counts for the original dataset
+#'     counts =apCount(ap, exprs(apColonData$expr))
 #'  }
 #' @export  
 setMethod("apCount",

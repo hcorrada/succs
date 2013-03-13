@@ -14,12 +14,12 @@ biocViews: Classification
 Suggests:
     antiProfilesData
 Collate:
-    'succs-package.r'
     'AllClasses.R'
     'AllGenerics.R'
     'show-methods.R'
-    'succStats.R'
-    'succs-methods.R'
-    'succsCounts-methods.R'
-    'succsReorder-methods.R'
     'colonstats.r'
+    'antiProfiles-package.r'
+    'ap-methods.r'
+    'apCounts-methods.r'
+    'apReorder-methods.r'
+    'apStats.r'
