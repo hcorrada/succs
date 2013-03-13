@@ -1,0 +1,125 @@
+%\VignetteIndexEntry{Introduction to antiProfiles}
+%\VignetteDepends{antiProfiles}
+%\VignetteDepends{antiProfilesData}
+%\VignetteDepends{RColorBrewer}
+\documentclass[12pt]{article}
+
+<<options,echo=FALSE,eval=FALSE,results=hide>>=
+options(width=70)
+@
+
+\SweaveOpts{eps=FALSE,echo=TRUE}
+
+\usepackage{times}
+\usepackage{color,hyperref}
+\usepackage{fullpage}
+\usepackage[numbers]{natbib}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.75}
+\hypersetup{colorlinks,breaklinks,linkcolor=darkblue,urlcolor=darkblue,
+            anchorcolor=darkblue,citecolor=darkblue}
+            
+\newcommand{\Rcode}[1]{{\texttt{#1}}}
+\newcommand{\Rpackage}[1]{{\texttt{#1}}}
+\newcommand{\software}[1]{{\texttt{#1}}}
+\newcommand{\R}{\software{R}}
+\newcommand{\bold}[1]{\textbf{#1}} % Fix for R bibentry
+
+\title{Introduction to antiProfiles}
+\author{H\'{e}ctor Corrada Bravo \texttt{hcorrada@gmail.com}}
+\date{Modified: March 13, 2013. Compiled: \today}
+
+\begin{document}
+
+\setlength{\parskip}{1\baselineskip}
+\setlength{\parindent}{0pt}
+
+\maketitle
+
+\section*{Introduction}
+
+This package implements the gene expression anti-profiles method in \cite{ap}. In this vignette we will use the companion \Rpackage{antiProfilesData} package to illustrate some of the analysis in that paper. 
+
+<<libload>>=
+library(antiProfiles)
+library(antiProfilesData)
+library(RColorBrewer)
+@
+
+\section*{Colon cancer expression data}
+
+The \Rpackage{antiProfilesData} package contains expression data from normal colon tissue samples and colon cancer samples from two datasets in the Gene Expression Omnibus, \url{http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE8671} and \url{http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE4183}. Probesets annotated to genes within blocks of hypo-methylation in colon cancer defined in \cite{kh}. Let's load the data and take a look at its contents.
+
+<<loaddata>>=
+data(apColonData)
+show(apColonData)
+
+# look at sample types by experiment and status
+table(apColonData$Status, apColonData$SubType, apColonData$ExperimentID)
+@
+
+The data is stored as an \Rcode{ExpressionSet}. This dataset contains colon adenomas, benign but hyperplastic growths along with the normal and tumor tissues. Let's remove these from the remaining analysis.
+
+<<dropadenomas>>=
+drop=apColonData$SubType=="adenoma"
+apColonData=apColonData[,!drop]
+@
+
+\section*{Building antiprofiles}
+
+We will use data from one of the experiments to train the anti-profile and test it on the data from the other experiment.
+
+\subsection*{Computing variance ratios}
+
+The first step in building an antiprofile is to calculate the ratio of normal variance to cancer variance. This is done with the \Rcode{apStats} function.
+
+<<getstats>>=
+trainSamples=pData(apColonData)$ExperimentID=="GSE4183"
+colonStats=apStats(exprs(apColonData)[,trainSamples], 
+                   pData(apColonData)$Status[trainSamples],minL=5)
+show(colonStats)
+@
+
+We can see how that ratio is distributed for these probesets:
+
+<<plotstat,fig=TRUE,width=4,height=4>>=
+hist(colonStats@probes$stat, nc=100, 
+     main="Histogram of log variance ratio", xlab="log2 variance ratio")
+@
+
+\subsection*{Building the anti-profile}
+
+Now we construct the anti-profile by selecting the 100 probesets most hyper-variable probesets
+
+<<buildap>>=
+ap=buildAntiProfile(colonStats, tissueSpec=FALSE, sigsize=100)
+show(ap)
+@
+
+\subsection*{Computing the anti-profile score}
+
+Given the estimated anti-profile, we can get anti-profile scores for a set of samples.
+
+<<plotscore,fig=TRUE,width=6,height=5>>=
+counts=apCount(ap, exprs(apColonData)[,!trainSamples])
+palette(brewer.pal(8,"Dark2"))
+
+# plot in score order
+o=order(counts)
+dotchart(counts[o],col=pData(apColonData)$Status[!trainSamples][o]+1,
+         labels="",pch=19,xlab="anti-profile score", 
+         ylab="samples",cex=1.3)
+legend("bottomright", legend=c("Cancer","Normal"),pch=19,col=2:1)
+@
+
+We see in this case that the anti-profile score can distinguish the test samples perfectly.
+
+\bibliographystyle{plain}
+\bibliography{antiProfiles}
+
+\section*{SessionInfo}
+
+<<sessionInfo,results=tex,eval=TRUE,echo=FALSE>>=
+toLatex(sessionInfo())
+@
+
+\end{document}
