@@ -1,3 +1,9 @@
+#' @export
+setGeneric("getProbeStats",
+           function(object) standardGeneric("getProbeStats"),
+           signature=c("object"))
+
+#' 
 #' Create an anti-profile from a AntiProfileStats object
 #' 
 #' This function creates anti-profile using statistics stored in a AntiProfileStats object
@@ -26,10 +32,6 @@
 setGeneric("buildAntiProfile",
            function(stats, tissueSpec=TRUE, ...) standardGeneric("buildAntiProfile"),
            signature=c("stats"))
-
-setGeneric("tissueProps",
-           function(stats, e, isNormal, tiss, cutoff, ...) standardGeneric("tissueProps"),
-           signature=c("stats","e","isNormal","tiss","cutoff"))
 
 #' Obtain the anti-profile score for a set of samples
 #' 
