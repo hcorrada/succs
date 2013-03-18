@@ -19,6 +19,8 @@
 #'  }
 #' 
 #' @author Hector Corrada Bravo \email{hcorrada@@gmail.com}
+#' @seealso \code{\linkS4class{AntiProfileStats}} for the type of object returned. \code{\link{buildAntiProfile}} to construct anti-profiles
+#' with objects returned by this function.
 #' 
 #' @export
 apStats <- function(e, cl, tiss=NULL, minL=10, cutoff=5, OnCutoff=2.54)
