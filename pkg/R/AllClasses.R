@@ -1,3 +1,24 @@
+#' Statistics used to build anti-profiles
+#' 
+#' This class stores statistics required to build anti-profiles. Objects of this class should be built using the \code{\link{apStats}} function. To build anti-profiles from objects of this class, use the \code{\link{buildAntiProfile}} function.
+#' 
+#' @section FIXME:
+#' ## usage
+#' ## Accessors
+#' \S4method{getProbeStats}{AntiProfileStats}(object)
+#' 
+#' @seealso \code{\link{apStats}} to construct objects of this class, \code{\link{buildAntiProfile}} to build anti-profiles from objects of this class.
+#' 
+#' @name AntiProfileStats-class
+#' @rdname antiprofilestats-class
+#' @author Hector Corrada Bravo \email{hcorrada@@gmail.com}
+#' @examples
+#' if (require(antiProfilesData)) { 
+#'    data(apColonData)
+#'    colonStats = apStats(exprs(apColonData), pData(apColonData)$Status)
+#'    show(getProbeStats(colonStats))
+#'  }
+#' 
 #' @export
 setClass("AntiProfileStats",
          representation=representation(probes="data.frame",
