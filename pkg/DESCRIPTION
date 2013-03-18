@@ -16,9 +16,9 @@ Suggests:
     knitr,
     RColorBrewer
 Collate:
-    'AllClasses.R'
-    'AllGenerics.R'
-    'show-methods.R'
+    'AllClasses.r'
+    'AllGenerics.r'
+    'show-methods.r'
     'antiProfiles-package.r'
     'ap-methods.r'
     'apCounts-methods.r'

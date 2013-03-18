@@ -18,6 +18,8 @@
 #'    colonStats = apStats(exprs(apColonData), pData(apColonData)$Status)
 #'  }
 #' 
+#' @author Hector Corrada Bravo \email{hcorrada@@gmail.com}
+#' 
 #' @export
 apStats <- function(e, cl, tiss=NULL, minL=10, cutoff=5, OnCutoff=2.54)
   {

@@ -27,6 +27,14 @@
 #'    \item{\code{tProps1}:}{Proportion of cancer samples outside normal region of expression for each tumor type}
 #'  }
 #'
+#' @author Hector Corrada Bravo \email{hcorrada@@gmail.com}
+#' @examples
+#'   if (require(antiProfilesData)) {
+#'     data(apColonData)
+#'     colonStats = apStats(exprs(apColonData), pData(apColonData)$Status)
+#'     show(colonStats)
+#'     show(probes(colonStats))
+#'   }
 #' @name AntiProfileStats-class
 #' @rdname antiprofilestats-class
 #' @export
@@ -55,6 +63,14 @@ setClass("AntiProfileStats",
 #'     \item{\code{cutoff}:}{Multiplier in mad used to determine region of normal expression}
 #'   }
 #'
+#' @author Hector Corrada Bravo \email{hcorrada@@gmail.com}
+#' @examples
+#'   if (require(antiProfilesData)) {
+#'     data(apColonData)
+#'     colonStats=apStats(exprs(apColonData), pData(apColonData)$Status)
+#'     colonAP = buildAntiProfile(colonStats, tissueSpec=FALSE, sigsize=10)
+#'     show(colonAP)
+#'   }
 #' @name AntiProfile-class
 #' @rdname antiprofile-class
 #' 
@@ -75,7 +91,17 @@ setClass("AntiProfile",
 #'    \item{\code{tMads}:}{Median absolute deviation for each tissue type}
 #'    \item{\code{theTiss}:}{List of tissue type names}
 #'   }
-#'   
+#' 
+#' @author Hector Corrada Bravo \email{hcorrada@@gmail.com}
+#' @examples 
+#'   if (require(antiProfilesData)) {
+#'     data(apColonData)
+#'     # fake tissues
+#'     tissue=rep(c("colon","lung"), len=length(sampleNames(apColonData)))
+#'     tissStats=apStats(exprs(apColonData), pData(apColonData)$Status, tiss=tissue)
+#'     tissAP=buildAntiProfile(tissStats, sigsize=10)
+#'     show(tissAP)
+#'   }   
 #' @name TissueSpecAntiProfile-class
 #' @rdname tissueSpecAntiprofile-class
 #' @export

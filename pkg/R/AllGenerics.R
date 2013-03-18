@@ -16,7 +16,10 @@
 #'   data(apColonData)
 #'   colonStats = apStats(exprs(apColonData), pData(apColonData)$Status)
 #'   ap = buildAntiProfile(colonStats, tissueSpec=FALSE, sigsize=10)
-#' }   
+#' } 
+#' 
+#' @author Hector Corrada Bravo \email{hcorrada@@gmail.com}
+#'   
 #' @export
 #' @docType methods
 #' @rdname buildAntiProfile-methods
@@ -35,7 +38,7 @@ setGeneric("tissueProps",
 #' 
 #' @param fit an object of class AntiProfile as produced by the buildAntiProfile method
 #' @param expr a matrix of gene expression, rownames are used as identifiers
-#' @return a vector of anti-profile scores
+#' @return a numeric vector of anti-profile scores
 #' 
 #' @examples 
 #'   if (require(antiProfilesData)) {
@@ -50,6 +53,9 @@ setGeneric("tissueProps",
 #'     # get counts for the original dataset
 #'     counts =apCount(ap, exprs(apColonData))
 #'  }
+#'  
+#' @author Hector Corrada Bravo \email{hcorrada@@gmail.com}
+#' 
 #' @export  
 #' @docType methods
 #' @rdname apCount-methods
@@ -73,6 +79,8 @@ setGeneric("apCount",
 #'   o = sample(seq(len=nrow(slot(colonStats,"probes"))))
 #'   newStats = apReorder(colonStats, o)
 #' } 
+#' 
+#' @author Hector Corrada Bravo \email{hcorrada@@gmail.com}
 #' 
 #' @export
 #' @docType methods
