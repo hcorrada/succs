@@ -13,7 +13,7 @@
 #'  }   
 #' }
 #' 
-#' @param object Object of class \code{\link{AntiProfileStats}}
+#' @param object Object of class \code{\linkS4class{AntiProfileStats}}
 #' @aliases getProbeStats,AntiProfileStats-method
 #' @rdname antiprofilestats-class
 #' @export
@@ -29,8 +29,8 @@ setMethod(getProbeStats,signature=c(object="AntiProfileStats"),
 #'  \item{\code{getNormalRegions}:}{median and upper boundary of normal expression regions (numeric matrix of dimension s-by-2, where s is the size of the anti-profile)}
 #' }
 #' 
-#' @param object Object of class (or inheriting from) \code{\link{AntiProfile}}
-#' @aliases getProbesetIds,AntiProfile-method getNormalRegions,AntiProfile-method
+#' @param object Object of class (or inheriting from) \code{\linkS4class{AntiProfile}}
+#' @aliases getProbesetIds,AntiProfile-method
 #' @rdname antiprofile-class
 #' @export
 setMethod(getProbesetIds, signature=c(object="AntiProfile"),
@@ -38,6 +38,8 @@ setMethod(getProbesetIds, signature=c(object="AntiProfile"),
             object@probes
           })
 
+#' @aliases getNormalRegions,AntiProfile-method
+#' @rdname antiprofile-class
 #' @export
 setMethod(getNormalRegions, signature=c(object="AntiProfile"),
           function(object) {
@@ -56,16 +58,17 @@ setMethod(getNormalRegions, signature=c(object="AntiProfile"),
 #'  where s is the size of the anti-profile, and t the number of normal tissues used in the anti-profile)}
 #' }
 #' 
-#' @param object Object of class \code{\link{TissueSpecAntiProfile}}
+#' @param object Object of class \code{\linkS4class{TissueSpecAntiProfile}}
 #' @aliases getProbesetIds,TissueSpecAntiProfile-method getNormalRegions,TissueSpecAntiProfile-method getNormalTissueRegions,TissueSpecAntiProfile-method
 #' @rdname tissuespecantiprofile-class
 #' @export
 setMethod(getNormalTissueRegions, signature=c(object="TissueSpecAntiProfile"),
           function(object) {
-            out=array(NA, dims=c(length(object@probes, 2, ncol(object@tMeds0))))
-            for (j in seq(len=ncol(object@tMeds0))) {
-              out[,,j]=cbind(object@tMeds0[,j], object@cutoff*object@tMads0[,j])
+            out=array(NA, 
+                      dim=c(length(object@probes), 2, ncol(object@tMeds)),
+                      dimnames=list(object@probes,c("median","upperBound"),colnames(object@tMeds)))
+            for (j in seq(len=ncol(object@tMeds))) {
+              out[,,j]=cbind(object@tMeds[,j], object@cutoff*object@tMads[,j])
             }
-            dimnames(out)=list(object@probes,c("median","upperBound"),names(object@theTiss))
             out
           })

@@ -7,7 +7,7 @@
 #' @section FIXME:
 #' ## usage
 #' ## Accessors
-#' \S4method{getProbeStats}{AntiProfileStats}(object)
+#' getProbeStats(object)
 #' 
 #' @seealso \code{\link{apStats}} to construct objects of this class, \code{\link{buildAntiProfile}} to build anti-profiles from objects of this class.
 #' 
@@ -39,8 +39,8 @@ setClass("AntiProfileStats",
 #' A gene expression anti-profile
 #' 
 #' This class encapsulates anti-profiles. 
-#' Objects of this class should be built from \code{\link{AntiProfileStats}} objects using the \code{\link{buildAntiProfile}} method.
-#' Anti-profile scores can be computed for new samples using the \code{\link{apCounts}} method.
+#' Objects of this class should be built from \code{\linkS4class{AntiProfileStats}} objects using the \code{\link{buildAntiProfile}} method.
+#' Anti-profile scores can be computed for new samples using the \code{\link{apCount}} method.
 #' 
 #' @section FIXME:
 #' ## usage
@@ -50,7 +50,7 @@ setClass("AntiProfileStats",
 #' getNormalRegions(object)
 #' 
 #' @seealso \code{\linkS4class{AntiProfileStats}} for the class of objects from which anti-profiles are built. \cite{\link{buildAntiProfile}}
-#' for the method used to construct objects of this class. \code{\link{apCounts}} for the function used to calculate anti-profile scores from
+#' for the method used to construct objects of this class. \code{\link{apCount}} for the function used to calculate anti-profile scores from
 #' objects of this class.
 #' 
 #' @author Hector Corrada Bravo \email{hcorrada@@gmail.com}
@@ -78,8 +78,8 @@ setClass("AntiProfile",
 #' A gene expression anti-profile using tissue-specific regions
 #'
 #' This class encapsulates anti-profiles with tissue-specific normal expression regions. 
-#' Objects of this class should be built from \code{\link{AntiProfileStats}} objects using the \code{\link{buildAntiProfile}} method.
-#' Anti-profile scores can be computed for new samples using the \code{\link{apCounts}} method.
+#' Objects of this class should be built from \code{\linkS4class{AntiProfileStats}} objects using the \code{\link{buildAntiProfile}} method.
+#' Anti-profile scores can be computed for new samples using the \code{\link{apCount}} method.
 #' 
 #' @section FIXME:
 #' ## usage
@@ -87,9 +87,10 @@ setClass("AntiProfile",
 #' 
 #' getProbesetIds(object)
 #' getNormalRegions(object)
+#' getNormalTissueRegions(object)
 #' 
 #'   @seealso \code{\linkS4class{AntiProfileStats}} for the class of objects from which anti-profiles are built. \cite{\link{buildAntiProfile}}
-#'   for the method used to construct objects of this class. \code{\link{apCounts}} for the function used to calculate anti-profile scores from
+#'   for the method used to construct objects of this class. \code{\link{apCount}} for the function used to calculate anti-profile scores from
 #'   objects of this class.
 #'                                                                                                                                                                                                                                                                                                                                                                                                                                                                              #' @author Hector Corrada Bravo \email{hcorrada@@gmail.com}
 #' @examples 
@@ -97,7 +98,7 @@ setClass("AntiProfile",
 #'     data(apColonData)
 #'     # fake tissues
 #'     tissue=rep(c("colon","lung"), len=length(sampleNames(apColonData)))
-#'     tissStats=apStats(exprs(apColonData), pData(apColonData)$Status, tiss=tissue)
+#'     tissStats=apStats(exprs(apColonData), pData(apColonData)$Status, tiss=tissue, minL=3)
 #'     tissAP=buildAntiProfile(tissStats, sigsize=10)
 #'     show(tissAP)
 #'     
