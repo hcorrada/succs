@@ -1,7 +1,7 @@
 Package: antiProfiles
 Maintainer: Hector Corrada Bravo <hcorrada@gmail.com>
 Author: Hector Corrada Bravo, Rafael A. Irizarry and Jeffrey T. Leek
-Version: 0.99.0
+Version: 0.99.1
 License: Artistic-2.0
 Title: Implementation of gene expression anti-profiles
 Description: Implements gene expression anti-profiles as described in Corrada
