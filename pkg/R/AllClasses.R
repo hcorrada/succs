@@ -36,15 +36,17 @@ setClass("AntiProfileStats",
 
 #' A gene expression anti-profile
 #' 
-#' Objects of this class are used to calculate anti-profile scores for samples.
+#' This class encapsulates anti-profiles. Anti-profile scores can be computed for new samples using the \code{\link{apCounts}} method.
 #' 
-#' @section Slots: \describe{
-#'     \item{\code{probes}:}{Affymetrix ids of probesets used in anti-profile}
-#'     \item{\code{meds0}:}{Median normal expression}
-#'     \item{\code{mads0}:}{Median absolute deviation of normal expression}
-#'     \item{\code{cutoff}:}{Multiplier in mad used to determine region of normal expression}
-#'   }
-#'
+#' @section FIXME:
+#' ## usage
+#' ## Accessors
+#' 
+#' getProbesetIds(object)
+#' getNormalRegions(object)
+#' 
+#' @seealso \code{\link{apStats}} for the object from which anti-profiles are built.
+#' 
 #' @author Hector Corrada Bravo \email{hcorrada@@gmail.com}
 #' @examples
 #'   if (require(antiProfilesData)) {
@@ -52,6 +54,9 @@ setClass("AntiProfileStats",
 #'     colonStats=apStats(exprs(apColonData), pData(apColonData)$Status)
 #'     colonAP = buildAntiProfile(colonStats, tissueSpec=FALSE, sigsize=10)
 #'     show(colonAP)
+#'     
+#'     head(getProbesetIds(colonAP))
+#'     head(getNormalRegions(colonAP))
 #'   }
 #' @name AntiProfile-class
 #' @rdname antiprofile-class
@@ -65,14 +70,18 @@ setClass("AntiProfile",
            filterFunc="character"))
 
 #' A gene expression anti-profile using tissue-specific regions
+#'
+#' This class encapsulates anti-profiles with tissue-specific normal expression regions. 
+#' Anti-profile scores can be computed for new samples using the \code{\link{apCounts}} method.
 #' 
-#' Objects of this class are used to calculate anti-profile scores for samples.
+#' @section FIXME:
+#' ## usage
+#' ## Accessors
 #' 
-#' @section Slots: \describe{
-#'    \item{\code{tMeds}:}{Median expression for each tissue type}
-#'    \item{\code{tMads}:}{Median absolute deviation for each tissue type}
-#'    \item{\code{theTiss}:}{List of tissue type names}
-#'   }
+#' getProbesetIds(object)
+#' getNormalRegions(object)
+#' 
+#' @seealso \code{\link{apStats}} for the object from which anti-profiles are built.
 #' 
 #' @author Hector Corrada Bravo \email{hcorrada@@gmail.com}
 #' @examples 
@@ -83,6 +92,10 @@ setClass("AntiProfile",
 #'     tissStats=apStats(exprs(apColonData), pData(apColonData)$Status, tiss=tissue)
 #'     tissAP=buildAntiProfile(tissStats, sigsize=10)
 #'     show(tissAP)
+#'     
+#'     head(getProbesetIds(tissAP))
+#'     head(getNormalRegions(tissAP))
+#'     head(getNormalTissueRegions(tissAP))
 #'   }   
 #' @name TissueSpecAntiProfile-class
 #' @rdname tissueSpecAntiprofile-class

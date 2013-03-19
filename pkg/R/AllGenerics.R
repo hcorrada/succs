@@ -3,7 +3,21 @@ setGeneric("getProbeStats",
            function(object) standardGeneric("getProbeStats"),
            signature=c("object"))
 
-#' 
+#' @export
+setGeneric("getProbesetIds",
+           function(object) standardGeneric("getProbesetIds"),
+           signature=c("object"))
+
+#' @export
+setGeneric("getNormalRegions",
+           function(object) standardGeneric("getNormalRegions"),
+           signature=c("object"))
+
+#' @export
+setGeneric("getNormalTissueRegions",
+           function(object) standardGeneric("getNormalTissueRegions"),
+           signature=c("object"))
+
 #' Create an anti-profile from a AntiProfileStats object
 #' 
 #' This function creates anti-profile using statistics stored in a AntiProfileStats object
