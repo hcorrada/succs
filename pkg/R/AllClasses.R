@@ -78,6 +78,7 @@ setClass("AntiProfile",
 #' A gene expression anti-profile using tissue-specific regions
 #'
 #' This class encapsulates anti-profiles with tissue-specific normal expression regions. 
+#' Objects of this class should be built from \code{\link{AntiProfileStats}} objects using the \code{\link{buildAntiProfile}} method.
 #' Anti-profile scores can be computed for new samples using the \code{\link{apCounts}} method.
 #' 
 #' @section FIXME:
@@ -87,9 +88,10 @@ setClass("AntiProfile",
 #' getProbesetIds(object)
 #' getNormalRegions(object)
 #' 
-#' @seealso \code{\link{apStats}} for the object from which anti-profiles are built.
-#' 
-#' @author Hector Corrada Bravo \email{hcorrada@@gmail.com}
+#'   @seealso \code{\linkS4class{AntiProfileStats}} for the class of objects from which anti-profiles are built. \cite{\link{buildAntiProfile}}
+#'   for the method used to construct objects of this class. \code{\link{apCounts}} for the function used to calculate anti-profile scores from
+#'   objects of this class.
+#'                                                                                                                                                                                                                                                                                                                                                                                                                                                                              #' @author Hector Corrada Bravo \email{hcorrada@@gmail.com}
 #' @examples 
 #'   if (require(antiProfilesData)) {
 #'     data(apColonData)
