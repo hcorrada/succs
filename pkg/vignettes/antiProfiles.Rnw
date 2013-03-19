@@ -29,6 +29,7 @@ options(width=70)
 \date{Modified: March 13, 2013. Compiled: \today}
 
 \begin{document}
+\SweaveOpts{concordance=TRUE}
 
 \setlength{\parskip}{1\baselineskip}
 \setlength{\parindent}{0pt}
@@ -37,9 +38,12 @@ options(width=70)
 
 \section*{Introduction}
 
-This package implements the gene expression anti-profiles method in \cite{ap}. In this vignette we will use the companion \Rpackage{antiProfilesData} package to illustrate some of the analysis in that paper. 
+This package implements the gene expression anti-profiles method in \cite{ap}. Anti-profiles are a new approach for developing cancer genomic signatures that specifically takes advantage of gene expression heterogeneity. They explicitly model increased gene expression variability in cancer to define robust and reproducible gene expression signatures capable of accurately distinguishing tumor samples from healthy controls.
+
+In this vignette we will use the companion \Rpackage{antiProfilesData} package to illustrate some of the analysis in that paper. 
 
 <<libload>>=
+# these are libraries used by this vignette
 library(antiProfiles)
 library(antiProfilesData)
 library(RColorBrewer)
@@ -66,7 +70,19 @@ apColonData=apColonData[,!drop]
 
 \section*{Building antiprofiles}
 
-We will use data from one of the experiments to train the anti-profile and test it on the data from the other experiment.
+The general anti-profile idea is to find genes with hyper-variable expression in cancer with respect to normal samples and classify new samples as normal vs. cancer based on deviation from a normal expression profile built from normal training samples. Anti-profiles are built using the following general algorithm:
+
+\begin{enumerate}
+\item Find candidate differentially variable genes (anti-profile genes): rank by ratio of cancer to normal variance
+\item Define region of normal expression for each anti-profile gene: normal median $\pm$ 5 * normal MAD
+\item For each sample to classify:
+\begin{enumerate}
+\item count number of antiProfile genes outside normal expression region (anti-profile score)
+\item if score is above threshold, then classify as cancer
+\end{enumerate}
+\end{enumerate}
+
+We will use data from one of the experiments to train the anti-profile (steps 1 and 2 above) and test it on the data from the other experiment (step 3).
 
 \subsection*{Computing variance ratios}
 
@@ -76,13 +92,13 @@ The first step in building an antiprofile is to calculate the ratio of normal va
 trainSamples=pData(apColonData)$ExperimentID=="GSE4183"
 colonStats=apStats(exprs(apColonData)[,trainSamples], 
                    pData(apColonData)$Status[trainSamples],minL=5)
-show(colonStats)
+head(getProbeStats(colonStats))
 @
 
 We can see how that ratio is distributed for these probesets:
 
 <<plotstat,fig=TRUE,width=4,height=4>>=
-hist(colonStats@probes$stat, nc=100, 
+hist(getProbeStats(colonStats)$stat, nc=100, 
      main="Histogram of log variance ratio", xlab="log2 variance ratio")
 @
 
@@ -97,7 +113,7 @@ show(ap)
 
 \subsection*{Computing the anti-profile score}
 
-Given the estimated anti-profile, we can get anti-profile scores for a set of samples.
+Given the estimated anti-profile, we can get anti-profile scores for a set of testing samples.
 
 <<plotscore,fig=TRUE,width=6,height=5>>=
 counts=apCount(ap, exprs(apColonData)[,!trainSamples])
@@ -111,7 +127,7 @@ dotchart(counts[o],col=pData(apColonData)$Status[!trainSamples][o]+1,
 legend("bottomright", legend=c("Cancer","Normal"),pch=19,col=2:1)
 @
 
-We see in this case that the anti-profile score can distinguish the test samples perfectly.
+The anti-profile score measures deviation from the normal expression profile obtained from the training samples. We see in this case that the anti-profile score can distinguish the test samples perfectly based on deviation from the normal profile. 
 
 \bibliographystyle{plain}
 \bibliography{antiProfiles}
