@@ -44,9 +44,9 @@ In this vignette we will use the companion \Rpackage{antiProfilesData} package t
 
 <<libload>>=
 # these are libraries used by this vignette
-library(antiProfiles)
-library(antiProfilesData)
-library(RColorBrewer)
+require(antiProfiles)
+require(antiProfilesData)
+require(RColorBrewer)
 @
 
 \section*{Colon cancer expression data}

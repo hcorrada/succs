@@ -13,7 +13,6 @@ Depends:
 biocViews: GeneExpression,Classification
 Suggests:
     antiProfilesData,
-    knitr,
     RColorBrewer
 Collate:
     'AllClasses.r'
